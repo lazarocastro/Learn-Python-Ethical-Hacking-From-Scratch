@@ -44,10 +44,13 @@ def scan(ip):
     return clients_list
 
 def print_result(results_list):
+    count = 0
     if results_list:
         print("IP\t\t\tMAC Address\n-----------------------------------------")
         for client in results_list:
             print(client["ip"] + "\t\t" + client["mac"])
+            count += 1
+        print(color.GREEN_BOLD + "[+] Targets found: " + color.END + str(count))
     else:
         print(color.RED_BOLD + "[-] Network can't be scanning." + color.END)
 
