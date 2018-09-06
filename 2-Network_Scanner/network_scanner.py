@@ -24,11 +24,11 @@ class color:
 
 def get_arguments():
     parser = optparse.OptionParser()
-    parser.add_option("-a", "--address", dest="address", help="Address what you want to scan. Ex.: 10.0.0.1/24")
-    (option, address) = parser.parse_args()
-    if not option.address:
-        parser.error(color.RED_BOLD + "[-] Please especify an address what you want to scan. Ex.: 10.0.0.1/24 or --help for more info." + color.END)
-    return option
+    parser.add_option("-t", "--target", dest="target", help="Target IP / IP range. Ex.: 10.0.0.1/24")
+    (options, arguments) = parser.parse_args()
+    if not options.target:
+        parser.error(color.RED_BOLD + "[-] Please specify a target that you want to scan. Ex.: 10.0.0.1/24 or --help for more info." + color.END)
+    return options
 
 def scan(ip):
     print(color.GREEN_BOLD + "[+] Scanning Network " + color.END + ip)
@@ -51,6 +51,6 @@ def print_result(results_list):
     else:
         print(color.RED_BOLD + "[-] Network can't be scanning." + color.END)
 
-option = get_arguments()
-scan_result = scan(option.address)
+options = get_arguments()
+scan_result = scan(options.target)
 print_result(scan_result)
