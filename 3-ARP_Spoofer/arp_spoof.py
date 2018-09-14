@@ -37,7 +37,6 @@ def get_arguments():
     return options
 
 def get_mac(ip):
-    print(color.GREEN_BOLD + "[+] Scanning Network " + color.END + ip)
     arp_request = scapy.ARP(pdst=ip)
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
     arp_request_broadcast = broadcast/arp_request
@@ -64,11 +63,11 @@ try:
         spoof(options.target_ip, options.gateway_ip)
         spoof(options.gateway_ip, options.target_ip)
         packets_sent_count += 2
-        print("\r[+] Sent packets: " + str(packets_sent_count)),
+        print(color.GREEN_BOLD + "\r[+] Sent packets: " + color.END + str(packets_sent_count)),
         sys.stdout.flush()
         time.sleep(2)
 except KeyboardInterrupt:
-    print("\n[-] Detected CTRL + C ... Resetting ARP tables... Please wait.\n")
+    print(color.RED_BOLD + "\n[-] Detected CTRL + C ... Resetting ARP tables... Please wait.\n" + color.END)
     restore(options.target_ip, options.gateway_ip)
     restore(options.gateway_ip, options.target_ip)
 
